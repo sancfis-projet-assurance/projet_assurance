@@ -1,0 +1,46 @@
+{% extends 'assurance/main.html' %}
+{% load static %}
+{% block content %}
+
+<br>
+
+<div class="row">
+    <div class="container col-md-10 col-md-offset-1">
+        <h5>ADMINISTRATEUR SYSTEME :</h5>
+        <hr>
+        <div class="card card-body">
+            <a class="btn btn-dark btn-sm btn-block" href="{% url 'creer_agent_sancfis' %}">Ajouter Agent Sancfis</a>
+            <table class="table table-sm">
+                <tr>
+                    <th>Nom</th>
+                    <th>Prenom</th>
+                    <th>Adresse</th>
+                    <th>Téléphone</th>
+                    <th>Email</th>
+                    <th>Profession</th>
+                    <th>Ville</th>
+                    <th>Date Ajout</th>
+                </tr>
+
+                {% for agent in agentsancfis %}
+                    <tr>
+                        <td>{{ agent.nom }}</dt>
+                        <td>{{ agent.prenom }}</dt>
+                        <td>{{ agent.adresse }}</dt>
+                        <td>{{ agent.telephone }}</dt>
+                        <td>{{ agent.email }}</dt>
+                        <td>{{ agent.profession }}</dt>
+                        <td>{{ agent.ville }}</dt>
+                        <td>{{ agent.date_ajout }}</dt>
+                        <td><a class="btn btn-outline-success btn-sm" href="{% url 'modifier_agent_sancfis' agent.id %}">Modifier</a></td>
+                        <td><a class="btn btn-outline-danger btn-sm" href="{% url 'supprimer_agent_sancfis' agent.id %}">Supprimer</a></td>
+                    </tr>
+                {% endfor %}
+
+            </table>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
