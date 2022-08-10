@@ -35,6 +35,13 @@ class agentsSancfis(models.Model):
     def __str__(self):
         return self.nom
 
+    def save(self, *args, **kwargs):
+        try:
+            self.admin_systeme
+        except:
+            self.admin_systeme = adminSysteme.objects.first()
+        super().save(*args, **kwargs)
+
 class agentAssurance(models.Model):
      nomAgent=models.CharField(max_length=40)
      prenomAgent=models.CharField(max_length=40)
