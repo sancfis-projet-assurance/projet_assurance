@@ -7,7 +7,7 @@ from assurance.models import agentsSancfis
 def agentSancfis(request):
 
     context = {}
-    return render(request, 'assurance/agents_sancfis.html', context)
+    return render(request, 'sancfis/agents_sancfis.html', context)
 
 def creerAgentSancfis(request):
 
@@ -19,7 +19,7 @@ def creerAgentSancfis(request):
             return redirect('/')
 
     context = {'form': form}
-    return render(request, 'assurance/agentSancfis_form.html', context)
+    return render(request, 'sancfis/agentSancfis_form.html', context)
 
 def modifierAgentSancfis(request, pk):
 
@@ -33,7 +33,7 @@ def modifierAgentSancfis(request, pk):
             return redirect("/")
 
     context = {'form': form}
-    return render(request, 'assurance/agentSancfis_form.html', context)
+    return render(request, 'sancfis/agentSancfis_form.html', context)
 
 def supprimerAgentSancfis(request, pk):
 
@@ -43,6 +43,6 @@ def supprimerAgentSancfis(request, pk):
         return redirect('/')
 
     context = {'item': agentsancfis}
-    return render(request, 'assurance/supprimerAgentSancfis_form.html', context)
+    return render(request, 'sancfis/supprimerAgentSancfis_form.html', context)
 
 

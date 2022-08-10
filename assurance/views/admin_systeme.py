@@ -6,4 +6,4 @@ def adminSyteme(request):
     agentsancfis = agentsSancfis.objects.all()
 
     context = {'agentsancfis': agentsancfis}
-    return render(request, 'assurance/admin_systeme.html', context)
+    return render(request, 'admin/admin_systeme.html', context)
