@@ -23,6 +23,7 @@
                         
                         {% csrf_token %}
 
+                        {{ form.designation | as_crispy_field }}
                         {{ form1.username | as_crispy_field }}
                         {{ form1.first_name | as_crispy_field }}
                         {{ form1.last_name | as_crispy_field }}
@@ -39,8 +40,6 @@
                         {{ form.telephone | as_crispy_field }}
                         {{ form1.password1 | as_crispy_field }}
                         {{ form1.password2 | as_crispy_field }}
-                        {{ form.profession | as_crispy_field }}
-                        {{ form.genre | as_crispy_field }}
 
 
                         <br>
@@ -65,18 +64,17 @@
 <script>
 
     var form_fields = document.getElementsByTagName('input')
-    form_fields[1].placeholder = 'Nom utilisateur.....';
-    form_fields[2].placeholder = 'Nom.....';
-    form_fields[3].placeholder = 'Prénom.....';
-    form_fields[4].placeholder = 'Email.....';
-    form_fields[5].placeholder = 'Adresse.....';
-    form_fields[6].placeholder = 'Ville.....';
-    form_fields[7].placeholder = 'Pays.....';
-    form_fields[8].placeholder = 'Téléphone.....';
-    form_fields[9].placeholder = 'Mot de passe.....';
-    form_fields[10].placeholder = 'Confirmer mot de passe.....';
-    form_fields[11].placeholder = 'Profession.....';
-    form_fields[12].placeholder = 'Genre.....';
+    form_fields[1].placeholder = 'Désignation.....';
+    form_fields[2].placeholder = 'Nom Utilisateur.....';
+    form_fields[3].placeholder = 'Nom.....';
+    form_fields[4].placeholder = 'Prénom.....';
+    form_fields[5].placeholder = 'Email.....';
+    form_fields[6].placeholder = 'Adresse.....';
+    form_fields[7].placeholder = 'Ville.....';
+    form_fields[8].placeholder = 'Pays.....';
+    form_fields[9].placeholder = 'Téléphone.....';
+    form_fields[10].placeholder = 'Mot de passe.....';
+    form_fields[11].placeholder = 'Confirmer mot de passe.....';
 
     for (var field in form_fields){
         form_fields[field].className += ' form-control'

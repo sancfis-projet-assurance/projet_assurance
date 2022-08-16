@@ -1,4 +1,4 @@
-{% extends 'assurance/main_assurances.html' %}
+{% extends 'souscripteur/main_souscripteur.html' %}
 
 {% block content %}
 
@@ -17,14 +17,14 @@
                     <th>Email</th>
                 </tr>
 
-                {% for util in utilisateur %}
+                {% comment %} {% for util in utilisateur %}
                     <tr>
                         <td>{{ util.username }}</td>
                         <td>{{ util.first_name }}</dt>
                         <td>{{ util.last_name }}</dt>
                         <td>{{ util.email }}</dt>
                     </tr>
-                {% endfor %}
+                {% endfor %} {% endcomment %}
             </table>
         </div>
     </div>
@@ -32,9 +32,10 @@
     <div class="container col-md-7">
         <hr>
         <div class="card card-body">
-            <a class="btn btn-dark btn-sm btn-block" href="{% url 'creer_agent_assurance' %}">Ajouter Agent Assurance</a>
+            <a class="btn btn-dark btn-sm btn-block" href="{% url 'creer_souscripteur' %}">Ajouter Souscripteur</a>
             <table class="table table-sm">
                 <tr>
+                    <th>Désignation</th>
                     <th>Adresse</th>
                     <th>Téléphone</th>
                     <th>Profession</th>
@@ -43,18 +44,19 @@
                     <th>Date Ajout</th>
                 </tr>
 
-                {% for agent in agentassurance %}
+               
+
+                {% comment %} {% for agent in agentsancfis %}
                     <tr>
                         <td>{{ agent.adresse }}</dt>
                         <td>{{ agent.telephone }}</dt>
                         <td>{{ agent.profession }}</dt>
                         <td>{{ agent.ville }}</dt>
-                        <td>{{ agent.pays }}</dt>
                         <td>{{ agent.date_ajout }}</dt>
                         <td><a class="btn btn-outline-success btn-sm" href="{% url 'modifier_agent_sancfis' agent.id %}">Modifier</a></td>
                         <td><a class="btn btn-outline-danger btn-sm" href="{% url 'supprimer_agent_sancfis' agent.id %}">Supprimer</a></td>
                     </tr>
-                {% endfor %}
+                {% endfor %} {% endcomment %}
 
             </table>
         </div>

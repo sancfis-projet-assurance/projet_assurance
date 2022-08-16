@@ -23,16 +23,24 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="{% url 'admin_systeme' %}">Administrateur</a>
+                <a class="nav-link" href="{% url 'agent_sancfis' %}">Assurances</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'agents_sancfis' %}">Agents Sancfis</a>
+                <a class="nav-link" href="{% url 'centre_soins' %}">Centres de soins</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'assurance' %}">Assurance</a>
+                <a class="nav-link" href="{% url 'laboratoire' %}">Laboratoires</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'pharmacie' %}">Pharmacies</a>
             </li>
         </ul>
     </div>
+    <a href="{% url 'logout' %}" class="btn text-secondary px-0">
+        <div style="color: yellow">
+            logout
+        </div>
+    </a>
 
 </nav>
 

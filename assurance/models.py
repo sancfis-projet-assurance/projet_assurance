@@ -1,192 +1,353 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import User
+
 # Create your models here.
 
+class AdminSysteme(models.Model):
 
-class adminSysteme(models.Model):
-    nom = models.CharField(max_length=40, null=True)
-    prenom = models.CharField(max_length=40, null=True)
-    email = models.EmailField(max_length=100, null=True)
+    utilisateur = models.OneToOneField(User, on_delete=models.CASCADE)
+
     adresse = models.CharField(max_length=40, null=True)
+    telephone = models.CharField(max_length=20, null=True)
     ville = models.CharField(max_length=40, null=True)
     pays = models.CharField(max_length=40, null=True)
-    telephone = models.CharField(max_length=20, null=True)
-    motdepasse = models.CharField(max_length=25, null=True)
     profession = models.CharField(max_length=40, null=True)
-    date_ajout = models.DateTimeField(auto_now_add=True, null=True)
-
-    def __str__(self):
-        return self.nom
-
-class agentsSancfis(models.Model):
-    nom = models.CharField(max_length=40, null=True)
-    prenom = models.CharField(max_length=40, null=True)
-    email = models.EmailField(max_length=100, null=True)
-    adresse = models.CharField(max_length=40, null=True)
-    ville = models.CharField(max_length=40, null=True)
-    pays = models.CharField(max_length=40, null=True)
-    telephone = models.CharField(max_length=20, null=True)
-    motdepasse = models.CharField(max_length=25, null=True)
-    profession = models.CharField(max_length=40, null=True)
-    adminSysteme = models.ForeignKey(adminSysteme, on_delete=models.CASCADE, blank=True)
-    date_ajout = models.DateTimeField(auto_now_add=True, null=True)
+    CHOIX = (
+        ('MASCULIN', 'masculin'),
+        ('FEMININ', 'feminin'),
+    )
+    genre = models.CharField(max_length=10, choices=CHOIX, null=True)
+    date_ajout = models.DateTimeField(auto_now_add=True)
+    date_modif = models.DateTimeField(auto_now=True)
     
 
+class AgentSancfis(models.Model):
+
+    utilisateur = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    adresse = models.CharField(max_length=40, null=True)
+    ville = models.CharField(max_length=40, null=True)
+    pays = models.CharField(max_length=40, null=True)
+    telephone = models.CharField(max_length=20, null=True)
+    profession = models.CharField(max_length=40, null=True)
+    CHOIX = (
+        ('MASCULIN', 'masculin'),
+        ('FEMININ', 'feminin'),
+    )
+    genre = models.CharField(max_length=10, choices=CHOIX, null=True)
+    date_ajout = models.DateTimeField(auto_now_add=True)
+    date_modif = models.DateTimeField(auto_now=True)
+
     def __str__(self):
-        return self.nom
+        return self.telephone
 
     def save(self, *args, **kwargs):
         try:
-            self.admin_systeme
+            self.utilisateur
         except:
-            self.admin_systeme = adminSysteme.objects.first()
+            self.utilisateur = User.objects.last()
         super().save(*args, **kwargs)
 
-class agentAssurance(models.Model):
-     nomAgent=models.CharField(max_length=40)
-     prenomAgent=models.CharField(max_length=40)
-     adresseAgent=models.CharField(max_length=40)
-     telAgent=models.CharField(max_length=15)
-     emailAgent = models.EmailField(unique=True)
-     passwordAgent=models.CharField(max_length=40)
-     profession=models.CharField(max_length=40)
+class AgentAssurance(models.Model):
+
+    utilisateur = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    adresse = models.CharField(max_length=40, null=True)
+    ville = models.CharField(max_length=40, null=True)
+    pays = models.CharField(max_length=40, null=True)
+    telephone = models.CharField(max_length=15, null=True)
+    profession = models.CharField(max_length=40, null=True)
+    CHOIX = (
+        ('MASCULIN', 'masculin'),
+        ('FEMININ', 'feminin'),
+    )
+    genre = models.CharField(max_length=10, choices=CHOIX, null=True)
+    date_ajout = models.DateTimeField(auto_now_add=True)
+    date_modif = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.telephone
+
+    def save(self, *args, **kwargs):
+        try:
+            self.utilisateur
+        except:
+            self.utilisateur = User.objects.last()
+        super().save(*args, **kwargs)
+
+
+class AgentLaboratoire(models.Model):
+
+    utilisateur = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    adresse = models.CharField(max_length=40, null=True)
+    ville = models.CharField(max_length=40, null=True)
+    pays = models.CharField(max_length=40, null=True)
+    telephone = models.CharField(max_length=15, null=True)
+    profession = models.CharField(max_length=40, null=True)
+    CHOIX = (
+        ('MASCULIN', 'masculin'),
+        ('FEMININ', 'feminin'),
+    )
+    genre = models.CharField(max_length=10, choices=CHOIX, null=True)
+    date_ajout = models.DateTimeField(auto_now_add=True)
+    date_modif = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.telephone
      
-     #renommer l'instance du modèle avec son nom de titre
-     def __str__(self):
-          return self.nomAgent
+    def save(self, *args, **kwargs):
+        try:
+            self.utilisateur
+        except:
+            self.utilisateur = User.objects.last()
+        super().save(*args, **kwargs)
+    
+class AgentPharmacie(models.Model):
 
-class agentLaboratoire(models.Model):
-     nomAgent=models.CharField(max_length=40)
-     prenomAgent=models.CharField(max_length=40)
-     adresseAgent=models.CharField(max_length=40)
-     telAgent=models.CharField(max_length=15)
-     emailAgent = models.EmailField(unique=True)
-     passwordAgent=models.CharField(max_length=40)
-     profession=models.CharField(max_length=40)
-     
-     def __str__(self):
-          return self.nomAgent
+    utilisateur = models.OneToOneField(User, on_delete=models.CASCADE)
 
-class agentPharmacie(models.Model):
-     nomAgent=models.CharField(max_length=40)
-     prenomAgent=models.CharField(max_length=40)
-     adresseAgent=models.CharField(max_length=40)
-     telAgent=models.CharField(max_length=15)
-     emailAgent = models.EmailField(unique=True)
-     passwordAgent=models.CharField(max_length=40)
-     profession=models.CharField(max_length=40)
-     
-     def __str__(self):
-          return self.nomAgent
+    adresse = models.CharField(max_length=40, null=True)
+    ville = models.CharField(max_length=40, null=True)
+    pays = models.CharField(max_length=40, null=True)
+    telephone = models.CharField(max_length=15, null=True)
+    profession = models.CharField(max_length=40, null=True)
+    CHOIX = (
+        ('MASCULIN', 'masculin'),
+        ('FEMININ', 'feminin'),
+    )
+    genre = models.CharField(max_length=10, choices=CHOIX, null=True)
+    date_ajout = models.DateTimeField(auto_now_add=True)
+    date_modif = models.DateTimeField(auto_now=True)
 
-class agentCs(models.Model):
-     nomAgent=models.CharField(max_length=40)
-     prenomAgent=models.CharField(max_length=40)
-     adresseAgent=models.CharField(max_length=40)
-     telAgent=models.CharField(max_length=15)
-     emailAgent = models.EmailField(unique=True)
-     passwordAgent=models.CharField(max_length=40)
-     profession=models.CharField(max_length=40)
-     
-     def __str__(self):
-          return self.nomAgent
+    def __str__(self):
+        return self.telephone
 
+    def save(self, *args, **kwargs):
+        try:
+            self.utilisateur
+        except:
+            self.utilisateur = User.objects.last()
+        super().save(*args, **kwargs)
+    
 
-class employe(models.Model):
-    dateEmbauche=models.DateField()
-    dateResiliation=models.DateField()
-    statut=models.BooleanField()
+class AgentCs(models.Model):
+
+    utilisateur = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    adresse = models.CharField(max_length=40, null=True)
+    ville = models.CharField(max_length=40, null=True)
+    pays = models.CharField(max_length=40, null=True)
+    telephone = models.CharField(max_length=15, null=True)
+    profession = models.CharField(max_length=40, null=True)
+    CHOIX = (
+        ('MASCULIN', 'masculin'),
+        ('FEMININ', 'feminin'),
+    )
+    genre = models.CharField(max_length=10, choices=CHOIX, null=True)
+    date_ajout = models.DateTimeField(auto_now_add=True)
+    date_modif = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.telephone
+
+    def save(self, *args, **kwargs):
+        try:
+            self.utilisateur
+        except:
+            self.utilisateur = User.objects.last()
+        super().save(*args, **kwargs)
+    
+    
+class Employe(models.Model):
+
+    dateEmbauche = models.DateField()
+    dateResiliation = models.DateField()
+    statut = models.BooleanField()
+    CHOIX = (
+        ('MASCULIN', 'masculin'),
+        ('FEMININ', 'feminin'),
+    )
+    genre = models.CharField(max_length=10, choices=CHOIX, null=True)
+    date_ajout = models.DateTimeField(auto_now_add=True)
+    date_modif = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.dateEmbauche
 
 class Assurance(models.Model):
-     nomAssurance=models.CharField(max_length=40)
-     adresseAssurance=models.CharField(max_length=40)
-     telAssurance=models.CharField(max_length=15)
-     emailAssurance = models.EmailField(unique=True)
-     passwordAssurance=models.CharField(max_length=40)
-     ville=models.CharField(max_length=40)
-     longitude=models.CharField(max_length=40)
-     latitude=models.CharField(max_length=40)
 
-     def __str__(self):
-          return self.nomAssurance
+    utilisateur = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    designation = models.CharField(max_length=40, null=True)
+    adresse = models.CharField(max_length=40, null=True)
+    telephone = models.CharField(max_length=15, null=True)
+    ville = models.CharField(max_length=40, null=True)
+    pays = models.CharField(max_length=40, null=True)
+    longitude = models.FloatField(max_length=20, null=True)
+    latitude = models.FloatField(max_length=20, null=True)
+    date_ajout = models.DateTimeField(auto_now_add=True)
+    date_modif = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.designation
+
+    def save(self, *args, **kwargs):
+        try:
+            self.utilisateur
+        except:
+            self.utilisateur = User.objects.last()
+        super().save(*args, **kwargs)
 
 
 class Laboratoire(models.Model):
-     nomLaboratoire=models.CharField(max_length=40)
-     adresseLaboratoire=models.CharField(max_length=40)
-     telLaboratoire=models.CharField(max_length=15)
-     emailLaboratoire= models.EmailField(unique=True)
-     passwordLaboratoire=models.CharField(max_length=40)
-     ville=models.CharField(max_length=40)
-     longitude=models.CharField(max_length=40)
-     latitude=models.CharField(max_length=40)
 
-     def __str__(self):
-          return self.nomLaboratoire
+    utilisateur = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    designation = models.CharField(max_length=40, null=True)
+    adresse = models.CharField(max_length=40, null=True)
+    telephone = models.CharField(max_length=15, null=True)
+    ville = models.CharField(max_length=40, null=True)
+    pays = models.CharField(max_length=40, null=True)
+    longitude = models.FloatField(max_length=40, null=True)
+    latitude = models.FloatField(max_length=40, null=True)
+    date_ajout = models.DateTimeField(auto_now_add=True)
+    date_modif = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.designation
+
+    def save(self, *args, **kwargs):
+        try:
+            self.utilisateur
+        except:
+            self.utilisateur = User.objects.last()
+        super().save(*args, **kwargs)
+
 
 class Pharmacie(models.Model):
-     nomPharmacie=models.CharField(max_length=40)
-     adressePharmacie=models.CharField(max_length=40)
-     telPharmacie=models.CharField(max_length=15)
-     emailPharmacie= models.EmailField(unique=True)
-     passwordPharmacie=models.CharField(max_length=40)
-     ville=models.CharField(max_length=40)
-     longitude=models.CharField(max_length=40)
-     latitude=models.CharField(max_length=40)
 
-     def __str__(self):
-          return self.nomPharmacie
+    utilisateur = models.OneToOneField(User, on_delete=models.CASCADE)
 
-class CentreDeSoins(models.Model):
-     nomCentreDeSoins=models.CharField(max_length=40)
-     adresseCentreDeSoins=models.CharField(max_length=40)
-     telCentreDeSoins=models.CharField(max_length=15)
-     emailCentreDeSoins= models.EmailField(unique=True)
-     passwordCentreDeSoins=models.CharField(max_length=40)
-     ville=models.CharField(max_length=40)
-     longitude=models.CharField(max_length=40)
-     latitude=models.CharField(max_length=40)
+    designation = models.CharField(max_length=40, null=True)
+    adresse = models.CharField(max_length=40, null=True)
+    telephone = models.CharField(max_length=15, null=True)
+    ville = models.CharField(max_length=40, null=True)
+    pays = models.CharField(max_length=40, null=True)
+    longitude = models.FloatField(max_length=40, null=True)
+    latitude = models.FloatField(max_length=40, null=True)
+    date_ajout = models.DateTimeField(auto_now_add=True)
+    date_modif = models.DateTimeField(auto_now=True)
 
-     def __str__(self):
-          return self.nomCentreDeSoins
+    def __str__(self):
+        return self.designation
 
+    def save(self, *args, **kwargs):
+        try:
+            self.utilisateur
+        except:
+            self.utilisateur = User.objects.last()
+        super().save(*args, **kwargs)
+
+    
+class centreDeSoins(models.Model):
+
+    utilisateur = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    designation = models.CharField(max_length=40, null=True)
+    adresse = models.CharField(max_length=40, null=True)
+    telephone = models.CharField(max_length=15, null=True)
+    ville = models.CharField(max_length=40, null=True)
+    pays = models.CharField(max_length=40, null=True)
+    longitude = models.FloatField(max_length=40, null=True)
+    latitude = models.FloatField(max_length=40, null=True)
+    date_ajout = models.DateTimeField(auto_now_add=True)
+    date_modif = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.designation
+
+    def save(self, *args, **kwargs):
+        try:
+            self.utilisateur
+        except:
+            self.utilisateur = User.objects.last()
+        super().save(*args, **kwargs)
+
+    
 class Souscripteur(models.Model):
-     nomSouscripteur=models.CharField(max_length=40)
-     adresseSouscripteur=models.CharField(max_length=40)
-     telSouscripteur=models.CharField(max_length=15)
-     emailSouscripteur= models.EmailField(unique=True)
-     passwordSouscripteur=models.CharField(max_length=40)
-     ville=models.CharField(max_length=40)
-     longitude=models.CharField(max_length=40)
-     latitude=models.CharField(max_length=40) 
 
-     def __str__(self):
-          return self.nomSouscripteur
+    utilisateur = models.OneToOneField(User, on_delete=models.CASCADE)
 
+    designation = models.CharField(max_length=40, null=True)
+    adresse = models.CharField(max_length=40, null=True)
+    telephone = models.CharField(max_length=15, null=True)
+    ville = models.CharField(max_length=40, null=True)
+    pays = models.CharField(max_length=40, null=True)
+    longitude = models.FloatField(max_length=40, null=True)
+    latitude = models.FloatField(max_length=40, null=True)
+    date_ajout = models.DateTimeField(auto_now_add=True)
+    date_modif = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.designation
+
+    def save(self, *args, **kwargs):
+        try:
+            self.utilisateur
+        except:
+            self.utilisateur = User.objects.last()
+        super().save(*args, **kwargs) 
+
+    
 class Assure(models.Model):
-     numeroAssure=models.CharField(40)
-     nomAssure=models.CharField(max_length=40)
-     prenomAssure=models.CharField(max_length=40)
-     adresseAssure=models.CharField(max_length=40)
-     telAssure=models.CharField(max_length=15)
-     emailAssure= models.EmailField(unique=True)
-     passwordAssure=models.CharField(max_length=40)
-     dateNaissAssure=models.DateField()
-     lieuNaissAssure=models.CharField(max_length=40)
-     taille=models.CharField(max_length=40)
-     masse=models.CharField(max_length=40)
-     ville=models.CharField(max_length=40)
-     defautSante=models.CharField(max_length=40)
-     profession=models.CharField(max_length=40)  
-     ayantDroit=models.BooleanField()    
-     statut=models.BooleanField()
 
-class PoliceAssurance(models.Model):
-    numeroPoliceAssurance=models.CharField(max_length=40)
-    taux=models.DecimalField(max_digits=5)
-    datePriseEffet=models.DateField()
-    dateFin=models.DateField()
-    statutModification=models.BooleanField()
+    utilisateur = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    numero = models.CharField(max_length=40, null=True)
+    adresse = models.CharField(max_length=40, null=True)
+    telephone = models.CharField(max_length=15, null=True)
+    dateNaiss = models.DateField()
+    lieuNaiss = models.CharField(max_length=40, null=True)
+    taille = models.FloatField(max_length=4, null=True)
+    masse = models.FloatField(max_length=6, null=True)
+    ville = models.CharField(max_length=40, null=True)
+    pays = models.CharField(max_length=40, null=True)
+    defautSante = models.CharField(max_length=40, null=True)
+    profession = models.CharField(max_length=40, null=True)  
+    ayantDroit = models.BooleanField()    
+    statut = models.BooleanField()
+    CHOIX = (
+        ('MASCULIN', 'masculin'),
+        ('FEMININ', 'feminin'),
+    )
+    genre = models.CharField(max_length=10, choices=CHOIX, null=True)
+    date_ajout = models.DateTimeField(auto_now_add=True)
+    date_modif = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.first_name
+
+    def save(self, *args, **kwargs):
+        try:
+            self.utilisateur
+        except:
+            self.utilisateur = User.objects.last()
+        super().save(*args, **kwargs)
+
+class policeAssurance(models.Model):
+
+    numero = models.CharField(max_length=40)
+    taux = models.IntegerField()
+    datePriseEffet = models.DateField()
+    dateFin = models.DateField()
+    statutModification = models.BooleanField()
+    date_ajout = models.DateTimeField(auto_now_add=True)
+    date_modif = models.DateTimeField(auto_now=True)
+    objects = models.Manager()
+
+    def __str__(self):
+        return self.numero
 
 class Prestation(models.Model):
     libellePrestation=models.CharField(max_length=40)
@@ -203,45 +364,47 @@ class Medicament(models.Model):
 class Ordonnance(models.Model):
     numeroOrdonnance=models.CharField(max_length=40)
 
-class pays(models.Model):
+class Pays(models.Model):
     pays=models.CharField(max_length=40)
 
-class ville(models.Model):
-    pays=models.ForeignKey(pays, on_delete=models.CASCADE)
+class Ville(models.Model):
+    pays=models.ForeignKey(Pays, on_delete=models.CASCADE)
     ville=models.CharField(max_length=40)
     
-class taille(models.Model):
+class Taille(models.Model):
     taille=models.CharField(max_length=5)
 
-class quantite(models.Model):
+class Quantite(models.Model):
     qtite=models.CharField(max_length=20)
 
-class forme(models.Model):
+class Forme(models.Model):
     forme=models.CharField(max_length=30)
 
-class moment(models.Model):
+class Moment(models.Model):
     moment=models.CharField(max_length=20)
 
-class periode(models.Model):
+class Periode(models.Model):
     periode=models.CharField(max_length=20)
 
-class profession(models.Model):
+class Profession(models.Model):
     profession=models.CharField(max_length=40)
 
-class masse(models.Model):
+class Masse(models.Model):
     masse=models.CharField(max_length=8)
 
-class prix(models.Model):
+class Prix(models.Model):
     prix=models.FloatField(max_length=40)
+    objects = models.Manager()
 
-class dosage(models.Model):
+class Dosage(models.Model):
     dosage=models.CharField(max_length=20)
 
-class frequence(models.Model):
+class Frequence(models.Model):
     frequence=models.CharField(max_length=20)
 
-class specialite(models.Model):
+class Specialite(models.Model):
     specialite=models.CharField(max_length=40)
 
 class voieAdministration(models.Model):
     voie=models.CharField(max_length=40)
+
