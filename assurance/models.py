@@ -7,6 +7,8 @@ class AdminSysteme(models.Model):
 
     utilisateur = models.OneToOneField(User, on_delete=models.CASCADE)
 
+    nom = models.CharField(max_length=40, null=True)
+    prenom = models.CharField(max_length=40, null=True)
     adresse = models.CharField(max_length=40, null=True)
     telephone = models.CharField(max_length=20, null=True)
     ville = models.CharField(max_length=40, null=True)
@@ -20,11 +22,15 @@ class AdminSysteme(models.Model):
     date_ajout = models.DateTimeField(auto_now_add=True)
     date_modif = models.DateTimeField(auto_now=True)
     
+    def __str__(self):
+        return self.prenom + ' ' + self.nom
 
 class AgentSancfis(models.Model):
 
     utilisateur = models.OneToOneField(User, on_delete=models.CASCADE)
 
+    nom = models.CharField(max_length=40, null=True)
+    prenom = models.CharField(max_length=40, null=True)
     adresse = models.CharField(max_length=40, null=True)
     ville = models.CharField(max_length=40, null=True)
     pays = models.CharField(max_length=40, null=True)
@@ -39,7 +45,7 @@ class AgentSancfis(models.Model):
     date_modif = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.telephone
+        return self.prenom + ' ' + self.nom
 
     def save(self, *args, **kwargs):
         try:
@@ -52,6 +58,8 @@ class AgentAssurance(models.Model):
 
     utilisateur = models.OneToOneField(User, on_delete=models.CASCADE)
 
+    nom = models.CharField(max_length=40, null=True)
+    prenom = models.CharField(max_length=40, null=True)
     adresse = models.CharField(max_length=40, null=True)
     ville = models.CharField(max_length=40, null=True)
     pays = models.CharField(max_length=40, null=True)
@@ -66,7 +74,7 @@ class AgentAssurance(models.Model):
     date_modif = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.telephone
+        return self.prenom + ' ' + self.nom
 
     def save(self, *args, **kwargs):
         try:
@@ -80,6 +88,8 @@ class AgentLaboratoire(models.Model):
 
     utilisateur = models.OneToOneField(User, on_delete=models.CASCADE)
 
+    nom = models.CharField(max_length=40, null=True)
+    prenom = models.CharField(max_length=40, null=True)
     adresse = models.CharField(max_length=40, null=True)
     ville = models.CharField(max_length=40, null=True)
     pays = models.CharField(max_length=40, null=True)
@@ -94,7 +104,7 @@ class AgentLaboratoire(models.Model):
     date_modif = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.telephone
+        return self.prenom + ' ' + self.nom
      
     def save(self, *args, **kwargs):
         try:
@@ -107,6 +117,8 @@ class AgentPharmacie(models.Model):
 
     utilisateur = models.OneToOneField(User, on_delete=models.CASCADE)
 
+    nom = models.CharField(max_length=40, null=True)
+    prenom = models.CharField(max_length=40, null=True)
     adresse = models.CharField(max_length=40, null=True)
     ville = models.CharField(max_length=40, null=True)
     pays = models.CharField(max_length=40, null=True)
@@ -121,7 +133,7 @@ class AgentPharmacie(models.Model):
     date_modif = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.telephone
+        return self.prenom + ' ' + self.nom
 
     def save(self, *args, **kwargs):
         try:
@@ -135,6 +147,8 @@ class AgentCs(models.Model):
 
     utilisateur = models.OneToOneField(User, on_delete=models.CASCADE)
 
+    nom = models.CharField(max_length=40, null=True)
+    prenom = models.CharField(max_length=40, null=True)
     adresse = models.CharField(max_length=40, null=True)
     ville = models.CharField(max_length=40, null=True)
     pays = models.CharField(max_length=40, null=True)
@@ -149,7 +163,7 @@ class AgentCs(models.Model):
     date_modif = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.telephone
+        return self.prenom + ' ' + self.nom
 
     def save(self, *args, **kwargs):
         try:
@@ -161,6 +175,8 @@ class AgentCs(models.Model):
     
 class Employe(models.Model):
 
+    nom = models.CharField(max_length=40, null=True)
+    prenom = models.CharField(max_length=40, null=True)
     dateEmbauche = models.DateField()
     dateResiliation = models.DateField()
     statut = models.BooleanField()
@@ -173,7 +189,7 @@ class Employe(models.Model):
     date_modif = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.dateEmbauche
+        return self.prenom + ' ' + self.nom
 
 class Assurance(models.Model):
 
@@ -303,7 +319,8 @@ class Souscripteur(models.Model):
 class Assure(models.Model):
 
     utilisateur = models.OneToOneField(User, on_delete=models.CASCADE)
-
+    nom = models.CharField(max_length=40, null=True)
+    prenom = models.CharField(max_length=40, null=True)
     numero = models.CharField(max_length=40, null=True)
     adresse = models.CharField(max_length=40, null=True)
     telephone = models.CharField(max_length=15, null=True)
@@ -326,7 +343,7 @@ class Assure(models.Model):
     date_modif = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.first_name
+        return self.numero
 
     def save(self, *args, **kwargs):
         try:

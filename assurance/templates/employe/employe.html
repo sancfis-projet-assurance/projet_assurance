@@ -1,0 +1,47 @@
+{% extends 'souscripteur/main_souscripteur.html' %}
+{% load static %}
+{% block content %}
+
+<br>
+
+<div class="row">
+
+    <div class="container col-md-10">
+        <hr>
+        <div class="card card-body">
+            <a class="btn btn-dark btn-sm btn-block" href="{% url 'creer_assure' %}">Ajouter Employé</a>
+            <table class="table table-sm">
+                <tr>
+                    <th>Nom</th>
+                    <th>Prenom</th>
+                    <th>Date Embauche</th>
+                    <th>Date Résiliation</th>
+                    <th>Statut</th>
+                    <th>Genre</th>
+                    <th>Date Ajout</th>
+                </tr>
+
+                
+
+                {% for employe in employes %}
+                    <tr>
+                        <td>{{ employe.nom }}</td>
+                        <td>{{ employe.prenom }}</td>
+                        <td>{{ employe.dateEmbauche }}</td>
+                        <td>{{ employe.dateResiliation }}</td>
+                        <td>{{ employe.statut }}</td>
+                        <td>{{ employe.genre }}</td>
+                        <td>{{ employe.date_ajout }}</td>
+                        <td><a class="btn btn-outline-dark btn-sm" href="">Détails</a></td>
+                        <td><a class="btn btn-outline-success btn-sm" href="{% url 'modifier_agent_sancfis' assure.id %}">Modifier</a></td>
+                        <td><a class="btn btn-outline-danger btn-sm" href="{% url 'supprimer_agent_sancfis' assure.id %}">Supprimer</a></td>
+                    </tr>
+                {% endfor %}
+
+            </table>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

@@ -17,31 +17,45 @@ urlpatterns = [
     
     ### URLS des Pages de redirections
 
-    path('', views.adminSyteme, name="admin_systeme"),
+    path('', views.acceuil, name="acceuil"),
+    path('agents_sancfis/', views.agentSancfis_page_admin, name="agent_sancfis_admin"),
+    path('assurance/', views.assurance_page_admin, name="assurance_admin"),
+    path('centre_soins/', views.centreSoins_page_admin, name="centre_soins_admin"),
+    path('pharmacie/', views.pharmacie_page_admin, name="pharmacie_admin"),
+    path('laboratoire/', views.laboratoire_page_admin, name="laboratoire_admin"),
+    path('assure/', views.assure_page_admin, name="assure_admin"),
+    path('souscripteur/', views.souscripteur_page_admin, name="souscripteur_admin"),
 
-    path('agents_sancfis/', views.agentSancfis, name="agent_sancfis"),
 
-    path('assurance/', views.assurance, name="assurance"),
 
-    path('centre_soins/', views.centreSoins, name="centre_soins"),
+    path('agents_sancfis/', views.agentSancfis_page, name="agent_sancfis"),
+    path('centre_soins/', views.centreSoins_page_sancfis, name="centre_soins_sancfis"),
+    path('pharmacie/', views.pharmacie_page_sancfis, name="pharmacie_sancfis"),
+    path('laboratoire/', views.laboratoire_page_sancfis, name="laboratoire_sancfis"),
+    path('assure/', views.assure_page_sancfis, name="assure_admin"),
+    path('souscripteur/', views.souscripteur_page_sancfis, name="souscripteur_sancfis"),
 
-    path('pharmacie/', views.pharmacie, name="pharmacie"),
+    path('assurance/', views.assurance_page, name="assurance"),
 
-    path('laboratoire/', views.laboratoire, name="laboratoire"),
+    path('centre_soins/', views.centreSoins_page, name="centre_soins"),
 
-    path('assure/', views.assure, name="assure"),
+    path('pharmacie/', views.pharmacie_page, name="pharmacie"),
 
-    path('souscripteur/', views.souscripteur, name="souscripteur"),
+    path('laboratoire/', views.laboratoire_page, name="laboratoire"),
 
-    path('agent_assurance/', views.agentAssurance, name="agent_assurance"),
+    path('assure/', views.assure_page, name="assure"),
 
-    path('agent_cs/', views.agentCs, name="agent_cs"),
+    path('souscripteur/', views.souscripteur_page, name="souscripteur"),
 
-    path('agent_pharmacie/', views.agentPharmacie, name="agent_pharmacie"),
+    path('agent_assurance/', views.agentAssurance_page, name="agent_assurance"),
 
-    path('agent_laboratoire/', views.agentLaboratoire, name="agent_laboratoire"),
+    path('agent_cs/', views.agentCs_page, name="agent_cs"),
 
-    path('employe/', views.employe, name="employe"),
+    path('agent_pharmacie/', views.agentPharmacie_page, name="agent_pharmacie"),
+
+    path('agent_laboratoire/', views.agentLaboratoire_page, name="agent_laboratoire"),
+
+    path('employe/', views.employe_page, name="employe"),
 
     ### URLS des Methodes
 

@@ -1,4 +1,4 @@
-{% extends 'labo/main_agentsLabo.html' %}
+{% extends 'admin/main_admin.html' %}
 
 {% block content %}
 
@@ -9,7 +9,7 @@
     <div class="container col-md-4 col-md-offset-1">
         <hr>
         <div class="card card-body">
-            <a class="btn btn-dark btn-sm btn-block" style="color: white;"><strong>Comptes Agents Laboratoires</strong></a>
+            <a class="btn btn-primary btn-sm btn-block" style="color: white;"> <strong> Comptes Souscripteurs </strong> </a>
             <table class="table table-sm">
                 <tr>
                     <th>Nom utilisateur</th>
@@ -18,8 +18,8 @@
 
                 {% for util in utilisateur %}
                     <tr>
-                        <td>{{ util.username }}</dd>
-                        <td>{{ util.email }}</td>
+                        <td>{{ util.username }}</td>
+                        <td>{{ util.email }}</dt>
                         <td><a class="btn btn-outline-dark btn-sm" href="">Voir</a></td>
                     </tr>
                 {% endfor %}
@@ -30,29 +30,27 @@
     <div class="container col-md-8">
         <hr>
         <div class="card card-body">
-            <a class="btn btn-dark btn-sm btn-block" href="{% url 'creer_agent_assurance' %}">Ajouter Agent Laboratoire</a>
+            <a class="btn btn-primary btn-sm btn-block" style="color: white;">Souscripteurs</a>
             <table class="table table-sm">
                 <tr>
-                    <th>Nom</th>
-                    <th>Prenom</th>
+                    <th>Désignation</th>
                     <th>Adresse</th>
                     <th>Téléphone</th>
-                    <th>Profession</th>
                     <th>Ville</th>
                     <th>Pays</th>
                     <th>Date Ajout</th>
                 </tr>
 
-                {% for agent in agentlaboratoire %}
+                
+
+                {% for souscripteur in Souscripteurs %}
                     <tr>
-                        <td>{{ agent.nom }}</td>
-                        <td>{{ agent.prenom }}</td>
-                        <td>{{ agent.adresse }}</td>
-                        <td>{{ agent.telephone }}</td>
-                        <td>{{ agent.profession }}</td>
-                        <td>{{ agent.ville }}</td>
-                        <td>{{ agent.pays }}</td>
-                        <td>{{ agent.date_ajout }}</td>
+                        <td>{{ souscripteur.designation }}</dt>
+                        <td>{{ souscripteur.adresse }}</dt>
+                        <td>{{ souscripteur.telephone }}</dt>
+                        <td>{{ souscripteur.ville }}</dt>
+                        <td>{{ souscripteur.pays }}</dt>
+                        <td>{{ souscripteur.date_ajout }}</dt>
                         <td><a class="btn btn-outline-success btn-sm" href="{% url 'modifier_agent_sancfis' agent.id %}">Modifier</a></td>
                         <td><a class="btn btn-outline-danger btn-sm" href="{% url 'supprimer_agent_sancfis' agent.id %}">Supprimer</a></td>
                     </tr>
@@ -63,5 +61,6 @@
     </div>
 
 </div>
+
 
 {% endblock %}

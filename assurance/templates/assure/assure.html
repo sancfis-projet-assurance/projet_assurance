@@ -12,16 +12,12 @@
             <table class="table table-sm">
                 <tr>
                     <th>Nom utilisateur</th>
-                    <th>Nom</th>
-                    <th>Prenom</th>
                     <th>Email</th>
                 </tr>
 
                 {% comment %} {% for util in utilisateur %}
                     <tr>
                         <td>{{ util.username }}</td>
-                        <td>{{ util.first_name }}</dt>
-                        <td>{{ util.last_name }}</dt>
                         <td>{{ util.email }}</dt>
                     </tr>
                 {% endfor %} {% endcomment %}
@@ -32,27 +28,15 @@
     <div class="container col-md-7">
         <hr>
         <div class="card card-body">
-            <a class="btn btn-dark btn-sm btn-block" href="{% url 'creer_agent_sancfis' %}">Ajouter Agent Sancfis</a>
+            <a class="btn btn-dark btn-sm btn-block" href="">Ordonnance</a>
             <table class="table table-sm">
                 <tr>
-                    <th>Numéro</th>
-                    <th>Date de Naissance</th>
-                    <th>Lieu de Naissance</th>
-                    <th>Taille</th>
-                    <th>Masse</th>
-                    <th>Adresse</th>
-                    <th>Téléphone</th>
-                    <th>Profession</th>
-                    <th>Type d'assuré</th>
-                    <th>Ville</th>
-                    <th>Pays</th>
-                    <th>Genre</th>
-                    <th>Date Ajout</th>
+                
                 </tr>
 
                 
 
-                {% comment %} {% for agent in agentsancfis %}
+               {% comment %}  {% for agent in agentsancfis %}
                     <tr>
                         <td>{{ agent.adresse }}</dt>
                         <td>{{ agent.telephone }}</dt>

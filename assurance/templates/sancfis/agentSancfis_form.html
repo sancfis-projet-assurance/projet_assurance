@@ -24,8 +24,8 @@
                         {% csrf_token %}
 
                         {{ form1.username | as_crispy_field }}
-                        {{ form1.first_name | as_crispy_field }}
-                        {{ form1.last_name | as_crispy_field }}
+                        {{ form.nom | as_crispy_field }}
+                        {{ form.prenom | as_crispy_field }}
                         {{ form1.email | as_crispy_field }}
                         {{ form.adresse | as_crispy_field }}
                         <div class="row">

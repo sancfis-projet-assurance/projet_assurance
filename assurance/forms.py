@@ -6,11 +6,9 @@ from .models import *
 class creerUtillisateur(UserCreationForm):
     class Meta:
         model = User
-        fields = ['username', 'email', 'first_name', 'last_name', 'password1', 'password2']
+        fields = ['username', 'email', 'password1', 'password2']
         labels = {
             'username': 'Nom utilisateur',
-            'first_name': 'Nom',
-            'last_name': 'Prénom',
             'email': 'Email',
             'password1': 'Mot de passe',
             'password2': 'Confirmer le mot de passe'
@@ -19,14 +17,16 @@ class creerUtillisateur(UserCreationForm):
 class adminSystemeForm(forms.ModelForm):
     class Meta:
         model = AdminSysteme
-        fields = ['adresse', 'telephone', 'ville', 'pays', 'profession', 'genre'] 
+        fields = ['nom', 'prenom', 'adresse', 'telephone', 'ville', 'pays', 'profession', 'genre'] 
 
 class assureForm(forms.ModelForm):
     class Meta:
         model = Assure
-        fields = ['numero', 'adresse', 'telephone', 'dateNaiss', 'lieuNaiss', 'taille', 
+        fields = ['nom', 'prenom', 'numero', 'adresse', 'telephone', 'dateNaiss', 'lieuNaiss', 'taille', 
                         'masse', 'ville', 'pays', 'defautSante', 'profession', 'ayantDroit', 'genre', 'statut']
         labels = {
+            'nom': 'Nom',
+            'prenom': 'Prénom',
             'numero': 'Numéro',
             'dateNaiss': 'Date de Naissance',
             'lieuNaiss': 'Lieu de Naissance',
@@ -53,7 +53,6 @@ class assuranceForm(forms.ModelForm):
             'ville': 'Ville',
             'pays': 'Pays',
             'telephone': 'Téléphone',
-            'profession': 'Profession',
             'longitude': 'Longitude',
             'Latitude': 'Latitude'
         }
@@ -68,7 +67,6 @@ class pharmacieForm(forms.ModelForm):
             'ville': 'Ville',
             'pays': 'Pays',
             'telephone': 'Téléphone',
-            'profession': 'Profession',
             'longitude': 'Longitude',
             'Latitude': 'Latitude'
         }
@@ -83,7 +81,6 @@ class laboratoireForm(forms.ModelForm):
             'ville': 'Ville',
             'pays': 'Pays',
             'telephone': 'Téléphone',
-            'profession': 'Profession',
             'longitude': 'Longitude',
             'Latitude': 'Latitude'
         }
@@ -98,15 +95,18 @@ class csForm(forms.ModelForm):
             'ville': 'Ville',
             'pays': 'Pays',
             'telephone': 'Téléphone',
-            'profession': 'Profession',
             'longitude': 'Longitude',
             'Latitude': 'Latitude'
         }
 class agentSancfisForm(forms.ModelForm):
     class Meta:
         model = AgentSancfis
-        fields = ['adresse', 'ville', 'pays', 'telephone', 'profession', 'genre']
+        fields = ['nom', 'prenom', 'adresse', 'ville', 'pays', 'telephone', 'profession', 'genre']
         labels = {
+            'nom': 'Nom',
+            'prenom': 'Prénom',
+            'nom': 'Nom',
+            'prenom': 'Prénom',
             'adresse': 'Adresse',
             'ville': 'Ville',
             'pays': 'Pays',
@@ -118,8 +118,10 @@ class agentSancfisForm(forms.ModelForm):
 class agentAssuranceForm(forms.ModelForm):
     class Meta:
         model = AgentAssurance
-        fields = ['adresse', 'ville', 'pays', 'telephone', 'profession', 'genre']
+        fields = ['nom', 'prenom', 'adresse', 'ville', 'pays', 'telephone', 'profession', 'genre']
         labels = {
+            'nom': 'Nom',
+            'prenom': 'Prénom',
             'adresse': 'Adresse',
             'ville': 'Ville',
             'pays': 'Pays',
@@ -131,8 +133,10 @@ class agentAssuranceForm(forms.ModelForm):
 class agentCsForm(forms.ModelForm):
     class Meta:
         model = AgentCs
-        fields = ['adresse', 'ville', 'pays', 'telephone', 'profession', 'genre']
+        fields = ['nom', 'prenom', 'adresse', 'ville', 'pays', 'telephone', 'profession', 'genre']
         labels = {
+            'nom': 'Nom',
+            'prenom': 'Prénom',
             'adresse': 'Adresse',
             'ville': 'Ville',
             'pays': 'Pays',
@@ -144,8 +148,10 @@ class agentCsForm(forms.ModelForm):
 class agentLaboratoireForm(forms.ModelForm):
     class Meta:
         model = AgentLaboratoire
-        fields = ['adresse', 'ville', 'pays', 'telephone', 'profession', 'genre']
+        fields = ['nom', 'prenom', 'adresse', 'ville', 'pays', 'telephone', 'profession', 'genre']
         labels = {
+            'nom': 'Nom',
+            'prenom': 'Prénom',
             'adresse': 'Adresse',
             'ville': 'Ville',
             'pays': 'Pays',
@@ -157,8 +163,10 @@ class agentLaboratoireForm(forms.ModelForm):
 class agentPharmacieForm(forms.ModelForm):
     class Meta:
         model = AgentPharmacie
-        fields = ['adresse', 'ville', 'pays', 'telephone', 'profession', 'genre']
+        fields = ['nom', 'prenom', 'adresse', 'ville', 'pays', 'telephone', 'profession', 'genre']
         labels = {
+            'nom': 'Nom',
+            'prenom': 'Prénom',
             'adresse': 'Adresse',
             'ville': 'Ville',
             'pays': 'Pays',
@@ -177,7 +185,6 @@ class souscripteurForm(forms.ModelForm):
             'ville': 'Ville',
             'pays': 'Pays',
             'telephone': 'Téléphone',
-            'profession': 'Profession',
             'longitude': 'Longitude',
             'Latitude': 'Latitude'
         }
@@ -185,8 +192,10 @@ class souscripteurForm(forms.ModelForm):
 class employeForm(forms.ModelForm):
     class Meta:
         model = Employe
-        fields = ['dateEmbauche', 'dateResiliation', 'statut', 'genre']
+        fields = ['nom', 'prenom', 'dateEmbauche', 'dateResiliation', 'statut', 'genre']
         labels = {
+            'nom': 'Nom',
+            'prenom': 'Prénom',
             'dateEmbauche': 'Date Embauche',
             'dateResiliation': 'Date Resiliation',
             'statut': 'Statut',

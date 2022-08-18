@@ -31,22 +31,175 @@ def connecter(request):
 
 @droits_admin
 @login_required(login_url='login')
-def adminSyteme(request):
+def acceuil(request):
+       
+    utilisateur = User.objects.filter(groups__name='admin')
+
+    context = {'utilisateur': utilisateur}
+    return render(request, 'admin/acceuil.html', context)
+
+@droits_admin
+@login_required(login_url='login')
+def agentSancfis_page_admin(request):
        
     agentsancfis = AgentSancfis.objects.all()
-    utilisateur = User.objects.all()
+    utilisateur = User.objects.filter(groups__name='groupe_agent_sancfis')
 
     context = {'agentsancfis': agentsancfis, 'utilisateur': utilisateur}
     return render(request, 'admin/admin_systeme.html', context)
 
-# LES VUES AGENTS SANCFIS
-
-@droits_utilisateur_type1(droit_agent_sancfis=['groupe_agent_sancfis', 'admin'])
+@droits_admin
 @login_required(login_url='login')
-def agentSancfis(request):
+def assurance_page_admin(request):
 
     assurances = Assurance.objects.all()
-    utilisateur = User.objects.all()
+    utilisateur1 = User.objects.filter(groups__name='groupe_assurance')
+
+    agentassurance = AgentAssurance.objects.all()
+    utilisateur = User.objects.filter(groups__name='groupe_agent_assurance')
+    
+    context = {'agentassurance': agentassurance, 'utilisateur': utilisateur,
+                'assurances': assurances, 'utilisateur1': utilisateur1}
+    return render(request, 'admin/assurance.html', context)
+
+@droits_admin
+@login_required(login_url='login')
+def assure_page_admin(request):
+    
+    assures = Assure.objects.all()
+    utilisateur = User.objects.filter(groups__name='groupe_assure')
+
+    employes = Employe.objects.all()
+    
+    context = {'assures': assures, 'employes': employes, 'utilisateur': utilisateur}
+    return render(request, 'admin/assure.html', context)
+
+@droits_admin
+@login_required(login_url='login')
+def pharmacie_page_admin(request):
+
+    pharmacies = Pharmacie.objects.all()
+    utilisateur1 = User.objects.filter(groups__name='groupe_pharmacie')
+
+    agentpharmacie = AgentPharmacie.objects.all()
+    utilisateur = User.objects.filter(groups__name='groupe_agent_pharmacie')
+    
+    context = {'agentpharmacie': agentpharmacie, 'utilisateur': utilisateur,
+                'pharmacies': pharmacies, 'utilisateur1': utilisateur1}
+    return render(request, 'admin/pharmacies.html', context)
+
+@droits_admin
+@login_required(login_url='login')
+def laboratoire_page_admin(request):
+
+    laboratoires = Laboratoire.objects.all()
+    utilisateur1 = User.objects.filter(groups__name='groupe_labo')
+
+    agentlaboratoire = AgentLaboratoire.objects.all()
+    utilisateur = User.objects.filter(groups__name='groupe_agent_labo')
+    
+    context = {'agentlaboratoire': agentlaboratoire, 'utilisateur': utilisateur,
+                'laboratoires': laboratoires, 'utilisateur1': utilisateur1}
+    return render(request, 'admin/labo.html', context)
+
+@droits_admin
+@login_required(login_url='login')
+def centreSoins_page_admin(request):
+
+    centredesoins = centreDeSoins.objects.all()
+    utilisateur1 = User.objects.filter(groups__name='groupe_cs')
+
+    agentcs = AgentCs.objects.all()
+    utilisateur = User.objects.filter(groups__name='groupe_agent_cs')
+    
+    context = {'agentcs': agentcs, 'utilisateur': utilisateur,
+                'centredesoins': centredesoins, 'utilisateur1': utilisateur1}
+    return render(request, 'admin/centresdesoins.html', context)
+
+@droits_admin
+@login_required(login_url='login')
+def souscripteur_page_admin(request):
+
+    souscripteurs = Souscripteur.objects.all()
+    utilisateur = User.objects.filter(groups__name='groupe_souscripteur')
+
+    context = {'souscripteurs': souscripteurs, 'utilisateur': utilisateur}
+    return render(request, 'admin/souscripteurs.html', context)
+
+
+# LES VUES AGENTS SANCFIS
+
+@droits_utilisateur_type1(droit_agent_sancfis=['groupe_agent_sancfis'])
+@login_required(login_url='login')
+def assure_page_sancfis(request):
+    
+    assures = Assure.objects.all()
+    utilisateur = User.objects.filter(groups__name='groupe_assure')
+
+    employes = Employe.objects.all()
+    
+    context = {'assures': assures, 'employes': employes, 'utilisateur': utilisateur}
+    return render(request, 'admin/assure.html', context)
+
+
+@droits_utilisateur_type1(droit_agent_sancfis=['groupe_agent_sancfis'])
+@login_required(login_url='login')
+def pharmacie_page_sancfis(request):
+
+    pharmacies = Pharmacie.objects.all()
+    utilisateur1 = User.objects.filter(groups__name='groupe_pharmacie')
+
+    agentpharmacie = AgentPharmacie.objects.all()
+    utilisateur = User.objects.filter(groups__name='groupe_agent_pharmacie')
+    
+    context = {'agentpharmacie': agentpharmacie, 'utilisateur': utilisateur,
+                'pharmacies': pharmacies, 'utilisateur1': utilisateur1}
+    return render(request, 'admin/pharmacies.html', context)
+
+@droits_utilisateur_type1(droit_agent_sancfis=['groupe_agent_sancfis'])
+@login_required(login_url='login')
+def laboratoire_page_sancfis(request):
+
+    laboratoires = Laboratoire.objects.all()
+    utilisateur1 = User.objects.filter(groups__name='groupe_labo')
+
+    agentlaboratoire = AgentLaboratoire.objects.all()
+    utilisateur = User.objects.filter(groups__name='groupe_agent_labo')
+    
+    context = {'agentlaboratoire': agentlaboratoire, 'utilisateur': utilisateur,
+                'laboratoires': laboratoires, 'utilisateur1': utilisateur1}
+    return render(request, 'admin/labo.html', context)
+
+@droits_utilisateur_type1(droit_agent_sancfis=['groupe_agent_sancfis'])
+@login_required(login_url='login')
+def centreSoins_page_sancfis(request):
+
+    centredesoins = centreDeSoins.objects.all()
+    utilisateur1 = User.objects.filter(groups__name='groupe_cs')
+
+    agentcs = AgentCs.objects.all()
+    utilisateur = User.objects.filter(groups__name='groupe_agent_cs')
+    
+    context = {'agentcs': agentcs, 'utilisateur': utilisateur,
+                'centredesoins': centredesoins, 'utilisateur1': utilisateur1}
+    return render(request, 'admin/centresdesoins.html', context)
+
+@droits_utilisateur_type1(droit_agent_sancfis=['groupe_agent_sancfis'])
+@login_required(login_url='login')
+def souscripteur_page_sancfis(request):
+
+    souscripteurs = Souscripteur.objects.all()
+    utilisateur = User.objects.filter(groups__name='groupe_souscripteur')
+
+    context = {'souscripteurs': souscripteurs, 'utilisateur': utilisateur}
+    return render(request, 'admin/souscripteurs.html', context)
+
+@droits_utilisateur_type1(droit_agent_sancfis=['groupe_agent_sancfis'])
+@login_required(login_url='login')
+def agentSancfis_page(request):
+
+    assurances = Assurance.objects.all()
+    utilisateur = User.objects.filter(groups__name='groupe_assurance')
 
     context = {'assurances': assurances, 'utilisateur': utilisateur}
     return render(request, 'sancfis/agents_sancfis.html', context)
@@ -82,7 +235,7 @@ def creerAgentSancfis(request):
 @login_required(login_url='login')
 def modifierAgentSancfis(request, pk):
 
-    agentsancfis = agentSancfis.objects.get(id=pk)
+    agentsancfis = AgentSancfis.objects.get(id=pk)
     form = agentSancfisForm(instance=agentsancfis)
 
     if request.method == "POST":
@@ -109,10 +262,10 @@ def supprimerAgentSancfis(request, pk):
 
 @login_required(login_url='login')
 @droits_utilisateur_type6(droit_assurance=['groupe_assurance', 'admin', 'groupe_agent_sancfis'])
-def assurance(request):
+def assurance_page(request):
 
     agentassurance = AgentAssurance.objects.all()
-    utilisateur = User.objects.all()
+    utilisateur = User.objects.filter(groups__name='groupe_agent_assurance')
     
     context = {'agentassurance': agentassurance, 'utilisateur': utilisateur}
     return render(request, 'assurance/assurance.html', context)
@@ -149,10 +302,10 @@ def creerAssurance(request):
 
 @login_required(login_url='login')
 @droits_utilisateur_type2(droit_agent_assurance=['groupe_agent_assurance', 'admin'])
-def agentAssurance(request):
+def agentAssurance_page(request):
 
     assures = Assure.objects.all()
-    utilisateur = User.objects.all()
+    utilisateur = User.objects.filter(groups__name='groupe_assure')
     
     context = {'assures': assures, 'utilisateur': utilisateur}
     return render(request, 'assurance/agents_assurance.html', context)
@@ -189,7 +342,7 @@ def creerAgentAssurance(request):
 
 @login_required(login_url='login')
 @droits_utilisateur_type7(droit_assure=['groupe_assure', 'admin', 'groupe_agent_sancfis'])
-def assure(request):
+def assure_page(request):
     
     context = {}
     return render(request, 'assure/assure.html', context)
@@ -226,12 +379,12 @@ def creerAssure(request):
 
 @login_required(login_url='login')
 @droits_utilisateur_type8(droit_pharmacie=['groupe_pharmacie', 'admin', 'groupe_agent_sancfis'])
-def pharmacie(request):
+def pharmacie_page(request):
 
     agentpharmacie = AgentPharmacie.objects.all()
-    utilisateur = User.objects.all()
+    utilisateur = User.objects.filter(groups__name='groupe_agent_pharmacie')
     
-    context = {'agentparmacie': agentpharmacie, 'utilisateur': utilisateur}
+    context = {'agentpharmacie': agentpharmacie, 'utilisateur': utilisateur}
     return render(request, 'pharmacie/pharmacies.html', context)
 
 @login_required(login_url='login')
@@ -266,9 +419,12 @@ def creerPharmacie(request):
 
 @login_required(login_url='login')
 @droits_utilisateur_type5(droit_agent_pharmacie=['groupe_agent_pharmacie', 'admin', 'groupe_agent_sancfis'])
-def agentPharmacie(request):
+def agentPharmacie_page(request):
+
+    assure = Assure.objects.all()
+    utilisateur = User.objects.filter(groups__name='groupe_assure')
     
-    context = {}
+    context = {'assure': assure, 'utilisateur': utilisateur}
     return render(request, 'pharmacie/agents_pharmacie.html', context)
 
 @login_required(login_url='login')
@@ -304,10 +460,10 @@ def creerAgentPharmacie(request):
 
 @login_required(login_url='login')
 @droits_utilisateur_type9(droit_laboratoire=['groupe_laboratoire', 'admin', 'groupe_agent_sancfis'])
-def laboratoire(request):
+def laboratoire_page(request):
 
     agentlaboratoire = AgentLaboratoire.objects.all()
-    utilisateur = User.objects.all()
+    utilisateur = User.objects.filter(groups__name='groupe_agent_labo')
     
     context = {'agentlaboratoire': agentlaboratoire, 'utilisateur': utilisateur}
     return render(request, 'labo/labo.html', context)
@@ -344,9 +500,12 @@ def creerLaboratoire(request):
 
 @login_required(login_url='login')
 @droits_utilisateur_type3(droit_agent_labo=['groupe_agent_labo', 'admin'])
-def agentLaboratoire(request):
+def agentLaboratoire_page(request):
+
+    assures = Assure.objects.all()
+    utilisateur = User.objects.filter(groups__name='groupe_assure')
     
-    context = {}
+    context = {'assures': assures, 'utilisateur': utilisateur}
     return render(request, 'labo/agents_labo.html', context)
 
 @login_required(login_url='login')
@@ -382,10 +541,10 @@ def creerAgentLaboratoire(request):
 
 @login_required(login_url='login')
 @droits_utilisateur_type10(droit_cs=['groupe_cs', 'admin', 'groupe_agent_sancfis'])
-def centreSoins(request):
+def centreSoins_page(request):
 
     agentcs = AgentCs.objects.all()
-    utilisateur = User.objects.all()
+    utilisateur = User.objects.filter(groups__name='groupe_agent_cs')
     
     context = {'agentcs': agentcs, 'utilisateur': utilisateur}
     return render(request, 'cs/centresdesoins.html', context)
@@ -422,9 +581,12 @@ def creerCentreSoins(request):
 
 @login_required(login_url='login')
 @droits_utilisateur_type4(droit_agent_cs=['groupe_agent_cs', 'admin'])
-def agentCs(request):
+def agentCs_page(request):
+
+    assures = Assure.objects.all()
+    utilisateur = User.objects.filter(groups__name='groupe_assure')
     
-    context = {}
+    context = {'assures': assures, 'utilisateur': utilisateur}
     return render(request, 'cs/agents_cs.html', context)
 
 @login_required(login_url='login')
@@ -459,13 +621,12 @@ def creerAgentCs(request):
 
 @login_required(login_url='login')
 @droits_utilisateur_type11(droit_souscripteur=['goupe_souscripteur', 'admin'])
-def souscripteur(request):
+def souscripteur_page(request):
 
-    assure = Assure.objects.all()
-    employe = Employe.objects.all()
-    utilisateur = User.objects.all()
+    assures = Assure.objects.all()
+    employes = Employe.objects.all()
     
-    context = {'assure': assure, 'employe': employe, 'utilisateur': utilisateur}
+    context = {'assures': assures, 'employes': employes}
     return render(request, 'souscripteur/souscripteurs.html', context)
 
 @login_required(login_url='login')
@@ -503,10 +664,10 @@ def creerSouscripteur(request):
 # LES VUES EMPLOYES
 
 @login_required(login_url='login')
-def employe(request):
+def employe_page(request):
     
     context = {}
-    return render(request, 'employe/employes.html', context)
+    return render(request, 'employe/employe.html', context)
 
 @login_required(login_url='login')
 def creerEmploye(request):
@@ -522,8 +683,6 @@ def creerEmploye(request):
             form1.save()
             
             form.save()
-
-            email = form1.cleaned_data.get('email')
 
             return redirect('/')
 

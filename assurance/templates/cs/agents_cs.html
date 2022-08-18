@@ -6,35 +6,14 @@
 
 <div class="row">
 
-    <div class="container col-md-5 col-md-offset-1">
+        <div class="container col-md-7">
         <hr>
         <div class="card card-body">
+            <a class="btn btn-dark btn-sm btn-block" style="color: white;"><strong>Assurés</strong></a>
             <table class="table table-sm">
                 <tr>
-                    <th>Nom utilisateur</th>
                     <th>Nom</th>
                     <th>Prenom</th>
-                    <th>Email</th>
-                </tr>
-
-                {% comment %} {% for util in utilisateur %}
-                    <tr>
-                        <td>{{ util.username }}</td>
-                        <td>{{ util.first_name }}</dt>
-                        <td>{{ util.last_name }}</dt>
-                        <td>{{ util.email }}</dt>
-                    </tr>
-                {% endfor %} {% endcomment %}
-            </table>
-        </div>
-    </div>
-
-    <div class="container col-md-7">
-        <hr>
-        <div class="card card-body">
-            <a class="btn btn-dark btn-sm btn-block" href="{% url 'creer_agent_sancfis' %}">Ajouter Agent Sancfis</a>
-            <table class="table table-sm">
-                <tr>
                     <th>Adresse</th>
                     <th>Téléphone</th>
                     <th>Profession</th>
@@ -44,17 +23,51 @@
 
                 
 
-                {% comment %} {% for agent in agentsancfis %}
+                {% for assure in assures %}
                     <tr>
-                        <td>{{ agent.adresse }}</dt>
-                        <td>{{ agent.telephone }}</dt>
-                        <td>{{ agent.profession }}</dt>
-                        <td>{{ agent.ville }}</dt>
-                        <td>{{ agent.date_ajout }}</dt>
+                        <td>{{ assure.nom }}</td>
+                        <td>{{ assure.prenom }}</td>
+                        <td>{{ assure.adresse }}</td>
+                        <td>{{ assure.telephone }}</td>
+                        <td>{{ assure.profession }}</td>
+                        <td>{{ assure.ville }}</td>
+                        <td>{{ assure.date_ajout }}</td>
+                        <td><a class="btn btn-outline-dark btn-sm" href="">Détails</a></td>
+                    </tr>
+                {% endfor %}
+
+            </table>
+        </div>
+    </div>
+
+    <div class="container col-md-5">
+        <hr>
+        <div class="card card-body">
+            <a class="btn btn-dark btn-sm btn-block" href="{% url 'creer_souscripteur' %}">Ajouter Employé</a>
+            <table class="table table-sm">
+                <tr>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Date Embauche</th>
+                    <th>Date Résiliation</th>
+                    <th>Statut</th>
+                    <th>Genre</th>
+                </tr>
+
+               
+
+                {% for employe in employes %}
+                    <tr>
+                        <td>{{ employe.nom }}</dt>
+                        <td>{{ employe.prenom }}</dt>
+                        <td>{{ employe.dateEmbauche }}</dt>
+                        <td>{{ employe.dateResiliation }}</dt>
+                        <td>{{ employe.statut }}</dt>
+                        <td>{{ employe.genre }}</dt>
                         <td><a class="btn btn-outline-success btn-sm" href="{% url 'modifier_agent_sancfis' agent.id %}">Modifier</a></td>
                         <td><a class="btn btn-outline-danger btn-sm" href="{% url 'supprimer_agent_sancfis' agent.id %}">Supprimer</a></td>
                     </tr>
-                {% endfor %} {% endcomment %}
+                {% endfor %}
 
             </table>
         </div>

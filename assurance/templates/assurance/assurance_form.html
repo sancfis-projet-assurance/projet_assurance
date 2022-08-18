@@ -15,7 +15,7 @@
         <div class="card bg-dark text-white">
             <div class="card card-header">
                 <div class="card-title" style="text-align: center; font-size: 25px;">
-                    Formulaire
+                    FORMULAIRE ASSURANCE
                 </div>
                 <div class="card-body">
 
@@ -23,10 +23,8 @@
                         
                         {% csrf_token %}
 
-                        {{ form.designation | as_crispy_field }}
                         {{ form1.username | as_crispy_field }}
-                        {{ form1.first_name | as_crispy_field }}
-                        {{ form1.last_name | as_crispy_field }}
+                        {{ form.designation | as_crispy_field }}
                         {{ form1.email | as_crispy_field }}
                         {{ form.adresse | as_crispy_field }}
                         <div class="row">
@@ -64,17 +62,15 @@
 <script>
 
     var form_fields = document.getElementsByTagName('input')
-    form_fields[1].placeholder = 'Désignation.....';
-    form_fields[2].placeholder = 'Nom Utilisateur.....';
-    form_fields[3].placeholder = 'Nom.....';
-    form_fields[4].placeholder = 'Prénom.....';
-    form_fields[5].placeholder = 'Email.....';
-    form_fields[6].placeholder = 'Adresse.....';
-    form_fields[7].placeholder = 'Ville.....';
-    form_fields[8].placeholder = 'Pays.....';
-    form_fields[9].placeholder = 'Téléphone.....';
-    form_fields[10].placeholder = 'Mot de passe.....';
-    form_fields[11].placeholder = 'Confirmer mot de passe.....';
+    form_fields[1].placeholder = 'Nom Utilisateur.....';
+    form_fields[2].placeholder = 'Désignation.....';
+    form_fields[3].placeholder = 'Email.....';
+    form_fields[4].placeholder = 'Adresse.....';
+    form_fields[5].placeholder = 'Ville.....';
+    form_fields[6].placeholder = 'Pays.....';
+    form_fields[7].placeholder = 'Téléphone.....';
+    form_fields[8].placeholder = 'Mot de passe.....';
+    form_fields[9].placeholder = 'Confirmer mot de passe.....';
 
     for (var field in form_fields){
         form_fields[field].className += ' form-control'
