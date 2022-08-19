@@ -28,19 +28,24 @@
 
                     {% csrf_token %}
 
-                    {% for message in messages %}
-                        <p style="color: green; text-align: center;" id="messages">{{ message }}</p>
-                    {% endfor %}
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Nom d'utilisateur</label>
+                        <input type="text" class="form-control" name="username"placeholder="Enter username">
+                    </div>
 
-                    {{ form | crispy }}
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Mot de passe</label>
+                        <input type="password" class="form-control" name="password" placeholder="Enter password">
+                    </div>
 
                     <hr>
 
-                    <button class="btn btn-info" type="submit" name="creer">Se connecter</button>
+                    <button class="btn btn-info" type="submit" name="Create User">Se connecter</button>
 
                     <hr>
 
                     <p style="text-align: center;">Don't have an account ? <a href="">S'inscrire</a></p>
+
 
                 </div>
             </div>

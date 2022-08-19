@@ -54,7 +54,7 @@ class assuranceForm(forms.ModelForm):
             'pays': 'Pays',
             'telephone': 'Téléphone',
             'longitude': 'Longitude',
-            'Latitude': 'Latitude'
+            'latitude': 'Latitude'
         }
 
 class pharmacieForm(forms.ModelForm):
@@ -68,7 +68,7 @@ class pharmacieForm(forms.ModelForm):
             'pays': 'Pays',
             'telephone': 'Téléphone',
             'longitude': 'Longitude',
-            'Latitude': 'Latitude'
+            'latitude': 'Latitude'
         }
 
 class laboratoireForm(forms.ModelForm):
@@ -82,7 +82,7 @@ class laboratoireForm(forms.ModelForm):
             'pays': 'Pays',
             'telephone': 'Téléphone',
             'longitude': 'Longitude',
-            'Latitude': 'Latitude'
+            'latitude': 'Latitude'
         }
 
 class csForm(forms.ModelForm):
@@ -96,7 +96,7 @@ class csForm(forms.ModelForm):
             'pays': 'Pays',
             'telephone': 'Téléphone',
             'longitude': 'Longitude',
-            'Latitude': 'Latitude'
+            'latitude': 'Latitude'
         }
 class agentSancfisForm(forms.ModelForm):
     class Meta:
@@ -186,7 +186,7 @@ class souscripteurForm(forms.ModelForm):
             'pays': 'Pays',
             'telephone': 'Téléphone',
             'longitude': 'Longitude',
-            'Latitude': 'Latitude'
+            'latitude': 'Latitude'
         }
 
 class employeForm(forms.ModelForm):

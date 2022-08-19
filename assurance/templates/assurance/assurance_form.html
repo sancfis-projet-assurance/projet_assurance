@@ -36,10 +36,11 @@
                             </div>
                         </div>
                         {{ form.telephone | as_crispy_field }}
+                        {{ form.longitude | as_crispy_field }}
+                        {{ form.latitude | as_crispy_field }}
                         {{ form1.password1 | as_crispy_field }}
                         {{ form1.password2 | as_crispy_field }}
-
-
+                        
                         <br>
 
                         <div class="row">
@@ -49,7 +50,7 @@
                                 </button>
                             </div>
                             <div class="col-md-4">
-                                <a class="btn btn-danger btn-block" href="{% url 'admin_systeme' %}">Annuler</a>
+                                <a class="btn btn-danger btn-block" href="{% url 'agent_sancfis' %}">Annuler</a>
                             </div>
                         </div>
 
@@ -69,8 +70,10 @@
     form_fields[5].placeholder = 'Ville.....';
     form_fields[6].placeholder = 'Pays.....';
     form_fields[7].placeholder = 'Téléphone.....';
-    form_fields[8].placeholder = 'Mot de passe.....';
-    form_fields[9].placeholder = 'Confirmer mot de passe.....';
+    form_fields[8].placeholder = 'Longitude.....';
+    form_fields[9].placeholder = 'Latitude.....';
+    form_fields[10].placeholder = 'Mot de passe.....';
+    form_fields[11].placeholder = 'Confirmer mot de passe.....';
 
     for (var field in form_fields){
         form_fields[field].className += ' form-control'

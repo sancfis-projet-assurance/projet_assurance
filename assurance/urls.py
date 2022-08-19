@@ -8,9 +8,7 @@ urlpatterns = [
 
     ### URLS authentification
 
-    path('login/', auth_views.LoginView.as_view(template_name='auth/login.html'), name='login'),
-
-    path('logout/', auth_views.LogoutView.as_view(template_name='auth/logout.html'), name='logout'),
+    path('logout/', views.deconnecter, name="logout"),
 
 
     path('connecter/', views.connecter, name="connecter"),
@@ -18,22 +16,22 @@ urlpatterns = [
     ### URLS des Pages de redirections
 
     path('', views.acceuil, name="acceuil"),
-    path('agents_sancfis/', views.agentSancfis_page_admin, name="agent_sancfis_admin"),
-    path('assurance/', views.assurance_page_admin, name="assurance_admin"),
-    path('centre_soins/', views.centreSoins_page_admin, name="centre_soins_admin"),
-    path('pharmacie/', views.pharmacie_page_admin, name="pharmacie_admin"),
-    path('laboratoire/', views.laboratoire_page_admin, name="laboratoire_admin"),
-    path('assure/', views.assure_page_admin, name="assure_admin"),
-    path('souscripteur/', views.souscripteur_page_admin, name="souscripteur_admin"),
+    path('agents_sancfis_admin/', views.agentSancfis_page_admin, name="agent_sancfis_admin"),
+    path('assurance_admin/', views.assurance_page_admin, name="assurance_admin"),
+    path('centre_soins_admin/', views.centreSoins_page_admin, name="centre_soins_admin"),
+    path('pharmacie_admin/', views.pharmacie_page_admin, name="pharmacie_admin"),
+    path('laboratoire_admin/', views.laboratoire_page_admin, name="laboratoire_admin"),
+    path('assure_admin/', views.assure_page_admin, name="assure_admin"),
+    path('souscripteur_admin/', views.souscripteur_page_admin, name="souscripteur_admin"),
 
 
 
     path('agents_sancfis/', views.agentSancfis_page, name="agent_sancfis"),
-    path('centre_soins/', views.centreSoins_page_sancfis, name="centre_soins_sancfis"),
-    path('pharmacie/', views.pharmacie_page_sancfis, name="pharmacie_sancfis"),
-    path('laboratoire/', views.laboratoire_page_sancfis, name="laboratoire_sancfis"),
-    path('assure/', views.assure_page_sancfis, name="assure_admin"),
-    path('souscripteur/', views.souscripteur_page_sancfis, name="souscripteur_sancfis"),
+    path('centre_soins_sancfis/', views.centreSoins_page_sancfis, name="centre_soins_sancfis"),
+    path('pharmacie_sancfis/', views.pharmacie_page_sancfis, name="pharmacie_sancfis"),
+    path('laboratoire_sancfis/', views.laboratoire_page_sancfis, name="laboratoire_sancfis"),
+    path('assure_sancfis/', views.assure_page_sancfis, name="assure_sancfis"),
+    path('souscripteur_sancfis/', views.souscripteur_page_sancfis, name="souscripteur_sancfis"),
 
     path('assurance/', views.assurance_page, name="assurance"),
 
@@ -91,9 +89,9 @@ urlpatterns = [
 
     # CENTRES DE SOINS
 
-    path('creer_cs/', views.creerCentreSoins, name="creer_agent_cs"),
-    path('modifier_agent_cs/<str:pk>/', views.modifierAgentSancfis, name="modifier_agent_cs"),
-    path('supprimer_agent_cs/<str:pk>/', views.supprimerAgentSancfis, name="supprimer_agent_cs"),
+    path('creer_cs/', views.creerCentreSoins, name="creer_cs"),
+    path('modifier_cs/<str:pk>/', views.modifierAgentSancfis, name="modifier_cs"),
+    path('supprimer_cs/<str:pk>/', views.supprimerAgentSancfis, name="supprimer_cs"),
 
     # ASSURANCES
 
