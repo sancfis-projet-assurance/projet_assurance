@@ -5,11 +5,11 @@ from django.contrib import messages
 from django.contrib.auth.models import User, Group
 from assurance.forms import *
 from assurance.models import *
-from .privileges import *
+from .privileges import droits_admin, droits_utilisateur, droits_groups, unauthenticated_user
 
 # AUTHENTIFICATION
 
-@unauthenticated_user
+''' @unauthenticated_user
 def connecter(request):
 
     if request.method == 'POST':
@@ -24,21 +24,21 @@ def connecter(request):
         else:
             messages.info(request, 'Email et ou mot de passe incorrect !!!')
 
-    context = {}
-    return render(request, 'auth/login.html', context)
+    context = {} 
+    return render(request, 'auth/login.html', context)'''
 
 def deconnecter(request):
     
     logout(request)
     messages.info(request, 'User logout successfuly !!!')
 
-    return redirect('connecter')
+    return redirect('login')
 
 
 # LES VUES ADMIN
 
-@droits_utilisateur(droit_acces=['admin'])
-@login_required(login_url='connecter')
+@droits_admin
+@login_required(login_url='login')
 def acceuil(request):
        
     utilisateur = User.objects.filter(groups__name='admin')
@@ -46,8 +46,8 @@ def acceuil(request):
     context = {'utilisateur': utilisateur}
     return render(request, 'admin/acceuil.html', context)
 
-@droits_utilisateur(droit_acces=['admin'])
-@login_required(login_url='connecter')
+@droits_admin
+@login_required(login_url='login')
 def agentSancfis_page_admin(request):
        
     agentsancfis = AgentSancfis.objects.all()
@@ -56,8 +56,8 @@ def agentSancfis_page_admin(request):
     context = {'agentsancfis': agentsancfis, 'utilisateur': utilisateur}
     return render(request, 'admin/admin_systeme.html', context)
 
-@droits_utilisateur(droit_acces=['admin'])
-@login_required(login_url='connecter')
+@droits_admin
+@login_required(login_url='login')
 def assurance_page_admin(request):
 
     assurances = Assurance.objects.all()
@@ -70,8 +70,8 @@ def assurance_page_admin(request):
                 'assurances': assurances, 'utilisateur1': utilisateur1}
     return render(request, 'admin/assurance.html', context)
 
-@droits_utilisateur(droit_acces=['admin'])
-@login_required(login_url='connecter')
+@droits_admin
+@login_required(login_url='login')
 def assure_page_admin(request):
     
     assures = Assure.objects.all()
@@ -82,8 +82,8 @@ def assure_page_admin(request):
     context = {'assures': assures, 'employes': employes, 'utilisateur': utilisateur}
     return render(request, 'admin/assure.html', context)
 
-@droits_utilisateur(droit_acces=['admin'])
-@login_required(login_url='connecter')
+@droits_admin
+@login_required(login_url='login')
 def pharmacie_page_admin(request):
 
     pharmacies = Pharmacie.objects.all()
@@ -96,8 +96,8 @@ def pharmacie_page_admin(request):
                 'pharmacies': pharmacies, 'utilisateur1': utilisateur1}
     return render(request, 'admin/pharmacies.html', context)
 
-@droits_utilisateur(droit_acces=['admin'])
-@login_required(login_url='connecter')
+@droits_admin
+@login_required(login_url='login')
 def laboratoire_page_admin(request):
 
     laboratoires = Laboratoire.objects.all()
@@ -110,8 +110,8 @@ def laboratoire_page_admin(request):
                 'laboratoires': laboratoires, 'utilisateur1': utilisateur1}
     return render(request, 'admin/labo.html', context)
 
-@droits_utilisateur(droit_acces=['admin'])
-@login_required(login_url='connecter')
+@droits_admin
+@login_required(login_url='login')
 def centreSoins_page_admin(request):
 
     centredesoins = centreDeSoins.objects.all()
@@ -124,8 +124,8 @@ def centreSoins_page_admin(request):
                 'centredesoins': centredesoins, 'utilisateur1': utilisateur1}
     return render(request, 'admin/centresdesoins.html', context)
 
-@droits_utilisateur(droit_acces=['admin'])
-@login_required(login_url='connecter')
+@droits_admin
+@login_required(login_url='login')
 def souscripteur_page_admin(request):
 
     souscripteurs = Souscripteur.objects.all()
@@ -138,7 +138,16 @@ def souscripteur_page_admin(request):
 # LES VUES AGENTS SANCFIS
 
 @droits_utilisateur(droit_acces=['groupe_agent_sancfis'])
-@login_required(login_url='connecter')
+@login_required(login_url='login')
+def acceuilSancfis(request):
+       
+    utilisateur = User.objects.filter(groups__name='groupe_agent_sancfis')
+
+    context = {'utilisateur': utilisateur}
+    return render(request, 'sancfis/acceuil.html', context)
+
+@droits_utilisateur(droit_acces=['groupe_agent_sancfis'])
+@login_required(login_url='login')
 def assure_page_sancfis(request):
     
     assures = Assure.objects.all()
@@ -151,7 +160,7 @@ def assure_page_sancfis(request):
 
 
 @droits_utilisateur(droit_acces=['groupe_agent_sancfis'])
-@login_required(login_url='connecter')
+@login_required(login_url='login')
 def pharmacie_page_sancfis(request):
 
     pharmacies = Pharmacie.objects.all()
@@ -165,7 +174,7 @@ def pharmacie_page_sancfis(request):
     return render(request, 'sancfis/pharmacies.html', context)
 
 @droits_utilisateur(droit_acces=['groupe_agent_sancfis'])
-@login_required(login_url='connecter')
+@login_required(login_url='login')
 def laboratoire_page_sancfis(request):
 
     laboratoires = Laboratoire.objects.all()
@@ -179,7 +188,7 @@ def laboratoire_page_sancfis(request):
     return render(request, 'sancfis/labo.html', context)
 
 @droits_utilisateur(droit_acces=['groupe_agent_sancfis'])
-@login_required(login_url='connecter')
+@login_required(login_url='login')
 def centreSoins_page_sancfis(request):
 
     centredesoins = centreDeSoins.objects.all()
@@ -193,7 +202,7 @@ def centreSoins_page_sancfis(request):
     return render(request, 'sancfis/centresdesoins.html', context)
 
 @droits_utilisateur(droit_acces=['groupe_agent_sancfis'])
-@login_required(login_url='connecter')
+@login_required(login_url='login')
 def souscripteur_page_sancfis(request):
 
     souscripteurs = Souscripteur.objects.all()
@@ -203,7 +212,7 @@ def souscripteur_page_sancfis(request):
     return render(request, 'sancfis/souscripteurs.html', context)
 
 @droits_utilisateur(droit_acces=['groupe_agent_sancfis'])
-@login_required(login_url='connecter')
+@login_required(login_url='login')
 def agentSancfis_page(request):
 
     assurances = Assurance.objects.all()
@@ -212,8 +221,8 @@ def agentSancfis_page(request):
     context = {'assurances': assurances, 'utilisateur': utilisateur}
     return render(request, 'sancfis/agents_sancfis.html', context)
 
+@unauthenticated_user
 @droits_utilisateur(droit_acces=['admin'])
-@login_required(login_url='connecter')
 def creerAgentSancfis(request):
 
     form = agentSancfisForm()
@@ -240,7 +249,7 @@ def creerAgentSancfis(request):
     return render(request, 'sancfis/agentSancfis_form.html', context)
 
 @droits_utilisateur(droit_acces=['groupe_agent_sancfis', 'admin'])
-@login_required(login_url='connecter')
+@login_required(login_url='login')
 def modifierAgentSancfis(request, pk):
 
     agentsancfis = AgentSancfis.objects.get(id=pk)
@@ -256,7 +265,7 @@ def modifierAgentSancfis(request, pk):
     return render(request, 'sancfis/agentSancfis_form.html', context)
 
 @droits_utilisateur(droit_acces=['admin'])
-@login_required(login_url='connecter')
+@login_required(login_url='login')
 def supprimerAgentSancfis(request, pk):
 
     agentsancfis = AgentSancfis.objects.get(id=pk)
@@ -269,7 +278,7 @@ def supprimerAgentSancfis(request, pk):
 
 # LES VUES ASSURANCE
 
-@login_required(login_url='connecter')
+@login_required(login_url='login')
 @droits_utilisateur(droit_acces=['groupe_agent_sancfis'])
 def assurance_page(request):
 
@@ -279,8 +288,8 @@ def assurance_page(request):
     context = {'agentassurance': agentassurance, 'utilisateur': utilisateur}
     return render(request, 'assurance/assurance.html', context)
 
+@unauthenticated_user
 @droits_utilisateur(droit_acces=['groupe_agent_sancfis'])
-@login_required(login_url='connecter')
 def creerAssurance(request):
     
     form = assuranceForm()
@@ -308,7 +317,7 @@ def creerAssurance(request):
 
 # LES VUES AGENTS ASSURANCE
 
-@login_required(login_url='connecter')
+@login_required(login_url='login')
 @droits_utilisateur(droit_acces=['groupe_agent_assurance', 'admin'])
 def agentAssurance_page(request):
 
@@ -318,8 +327,8 @@ def agentAssurance_page(request):
     context = {'assures': assures, 'utilisateur': utilisateur}
     return render(request, 'assurance/agents_assurance.html', context)
 
+@unauthenticated_user
 @droits_utilisateur(droit_acces=['groupe_assurance'])
-@login_required(login_url='connecter')
 def creerAgentAssurance(request):
     
     form = agentAssuranceForm()
@@ -346,14 +355,14 @@ def creerAgentAssurance(request):
 
 # LES VUES ASSURE
 
-@login_required(login_url='connecter')
+@login_required(login_url='login')
 @droits_utilisateur(droit_acces=['groupe_assure', 'admin', 'groupe_agent_sancfis'])
 def assure_page(request):
     
     context = {}
     return render(request, 'assure/assure.html', context)
 
-@login_required(login_url='connecter')
+@unauthenticated_user
 def creerAssure(request):
     
     form = assureForm()
@@ -383,7 +392,7 @@ def creerAssure(request):
 
 # LES VUES PHARMACIES
 
-@login_required(login_url='connecter')
+@login_required(login_url='login')
 @droits_utilisateur(droit_acces=['groupe_pharmacie', 'admin', 'groupe_agent_sancfis'])
 def pharmacie_page(request):
 
@@ -393,7 +402,7 @@ def pharmacie_page(request):
     context = {'agentpharmacie': agentpharmacie, 'utilisateur': utilisateur}
     return render(request, 'pharmacie/pharmacies.html', context)
 
-@login_required(login_url='connecter')
+@unauthenticated_user
 def creerPharmacie(request):
     
     form = pharmacieForm()
@@ -423,7 +432,7 @@ def creerPharmacie(request):
 
 # LES VUES AGENTS PHARMACIES
 
-@login_required(login_url='connecter')
+@login_required(login_url='login')
 @droits_utilisateur(droit_acces=['groupe_agent_pharmacie', 'admin', 'groupe_agent_sancfis'])
 def agentPharmacie_page(request):
 
@@ -433,7 +442,7 @@ def agentPharmacie_page(request):
     context = {'assure': assure, 'utilisateur': utilisateur}
     return render(request, 'pharmacie/agents_pharmacie.html', context)
 
-@login_required(login_url='connecter')
+@unauthenticated_user
 def creerAgentPharmacie(request):
     
     form = agentPharmacieForm()
@@ -464,7 +473,7 @@ def creerAgentPharmacie(request):
     
 # LES VUES LABORATOIRES
 
-@login_required(login_url='connecter')
+@login_required(login_url='login')
 @droits_utilisateur(droit_acces=['groupe_laboratoire', 'admin', 'groupe_agent_sancfis'])
 def laboratoire_page(request):
 
@@ -474,7 +483,7 @@ def laboratoire_page(request):
     context = {'agentlaboratoire': agentlaboratoire, 'utilisateur': utilisateur}
     return render(request, 'labo/labo.html', context)
 
-@login_required(login_url='connecter')
+@unauthenticated_user
 def creerLaboratoire(request):
     
     form = laboratoireForm()
@@ -501,7 +510,7 @@ def creerLaboratoire(request):
 
 # LES VUES AGENTS LABORATOIRES
 
-@login_required(login_url='connecter')
+@login_required(login_url='login')
 @droits_utilisateur(droit_acces=['groupe_agent_labo', 'admin'])
 def agentLaboratoire_page(request):
 
@@ -511,7 +520,7 @@ def agentLaboratoire_page(request):
     context = {'assures': assures, 'utilisateur': utilisateur}
     return render(request, 'labo/agents_labo.html', context)
 
-@login_required(login_url='connecter')
+@unauthenticated_user
 def creerAgentLaboratoire(request):
     
     form = agentLaboratoireForm()
@@ -539,7 +548,7 @@ def creerAgentLaboratoire(request):
 
 # LES VUES CENTRES DE SOINS
 
-@login_required(login_url='connecter')
+@login_required(login_url='login')
 @droits_utilisateur(droit_acces=['groupe_agent_sancfis'])
 def centreSoins_page(request):
 
@@ -549,7 +558,7 @@ def centreSoins_page(request):
     context = {'agentcs': agentcs, 'utilisateur': utilisateur}
     return render(request, 'cs/centresdesoins.html', context)
 
-@login_required(login_url='connecter')
+@unauthenticated_user
 def creerCentreSoins(request):
     
     form = csForm()
@@ -576,7 +585,7 @@ def creerCentreSoins(request):
 
 # LES VUES AGENTS CENTRES DE SOINS
 
-@login_required(login_url='connecter')
+@login_required(login_url='login')
 @droits_utilisateur(droit_acces=['groupe_agent_cs', 'admin'])
 def agentCs_page(request):
 
@@ -586,7 +595,7 @@ def agentCs_page(request):
     context = {'assures': assures, 'utilisateur': utilisateur}
     return render(request, 'cs/agents_cs.html', context)
 
-@login_required(login_url='connecter')
+@unauthenticated_user
 def creerAgentCs(request):
     
     form = agentCsForm()
@@ -613,7 +622,7 @@ def creerAgentCs(request):
 
 # LES VUES SOUSCRIPTEURS
 
-@login_required(login_url='connecter')
+@login_required(login_url='login')
 @droits_utilisateur(droit_acces=['goupe_souscripteur', 'admin'])
 def souscripteur_page(request):
 
@@ -623,7 +632,7 @@ def souscripteur_page(request):
     context = {'assures': assures, 'employes': employes}
     return render(request, 'souscripteur/souscripteurs.html', context)
 
-@login_required(login_url='connecter')
+@unauthenticated_user
 def creerSouscripteur(request):
     
     form = souscripteurForm()
@@ -654,13 +663,13 @@ def creerSouscripteur(request):
 
 # LES VUES EMPLOYES
 
-@login_required(login_url='connecter')
+@login_required(login_url='login')
 def employe_page(request):
     
     context = {}
     return render(request, 'employe/employe.html', context)
 
-@login_required(login_url='connecter')
+@unauthenticated_user
 def creerEmploye(request):
     
     form = employeForm()

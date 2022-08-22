@@ -8,10 +8,14 @@ urlpatterns = [
 
     ### URLS authentification
 
+    path('login/', auth_views.LoginView.as_view(template_name='auth/login.html'), name='login'),
+
+    #path('logout/', auth_views.LogoutView.as_view(template_name='auth/logout.html'), name='logout'),
+
     path('logout/', views.deconnecter, name="logout"),
 
 
-    path('connecter/', views.connecter, name="connecter"),
+    #path('connecter/', views.connecter, name="connecter"),
     
     ### URLS des Pages de redirections
 
@@ -25,7 +29,7 @@ urlpatterns = [
     path('souscripteur_admin/', views.souscripteur_page_admin, name="souscripteur_admin"),
 
 
-
+    path('', views.acceuilSancfis, name="acceuil_sancfis"),
     path('agents_sancfis/', views.agentSancfis_page, name="agent_sancfis"),
     path('centre_soins_sancfis/', views.centreSoins_page_sancfis, name="centre_soins_sancfis"),
     path('pharmacie_sancfis/', views.pharmacie_page_sancfis, name="pharmacie_sancfis"),
